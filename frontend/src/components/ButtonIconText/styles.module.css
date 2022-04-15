@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.container label {
+  margin-left: 0.5rem;
+  font-weight: 700;
+  color: var(--text-info);
+}

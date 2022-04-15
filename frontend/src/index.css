@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background-color);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+button {
+  font-size: 1rem;
+}
+
+:root {
+  --primary-color: #3678ea;
+  --highlight-color: #63b443;
+  --primary-color-text: #fff;
+  --highlight-color-text: #fff;
+  --background-color: #f0f2f5;
+  --border-color: #ccc;
+  --text: #000;
+  --text-info: #65676b;
+  --input-background-color: #f0f2f5;
+  --input-padding: 1rem;
+  --input-height: 2.25rem;
+  --input-border-radius: 0.25rem;
+  --box-padding: 0.875rem;
+  --box-background-color: #fff;
+  --box-border-radius: 0.25rem;
+  --box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+  --margin-small: 0.25rem;
+  --margin-medium: 0.5rem;
+  --margin-large: 1rem;
+}

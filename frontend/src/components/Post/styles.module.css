@@ -1,0 +1,33 @@
+.container hr {
+  border: 0;
+  border-bottom: 1px solid #ced0f4;
+}
+
+.userData {
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+
+.userData > div {
+  margin-left: 0.5rem;
+}
+
+.userData > div > h2 {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.userData > div > span {
+  font-size: 0.8rem;
+  color: var(--text-info);
+}
+
+.textArea p {
+  font-size: 0.8rem;
+}
+
+.buttonLikeCommentArea {
+  display: flex;
+  justify-content: space-around;
+}

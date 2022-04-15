@@ -1,0 +1,26 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.2rem;
+  height: var(--input-height);
+  border: 0;
+  border-radius: var(--box-border-radius);
+  background-color: var(--primary-color);
+  font-weight: bold;
+  color: var(--primary-color-text) !important;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.buttonFullWidth {
+  width: 100%;
+}
+
+.buttonSecondary {
+  background-color: var(--highlight-color);
+  align-self: center;
+}

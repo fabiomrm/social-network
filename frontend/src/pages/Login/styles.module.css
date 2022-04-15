@@ -1,0 +1,110 @@
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  max-width: 56rem;
+}
+
+.description {
+  flex: 1;
+  padding-top: 1.25rem;
+}
+
+.description h1 {
+  color: var(--primary-color);
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.description p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-color: var(--box-background-color);
+  padding: var(--box-padding);
+  border-radius: var(--box-border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.form form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.form hr {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--border-body);
+}
+
+.form a {
+  text-align: center;
+  color: var(--primary-color);
+  text-decoration: none;
+  margin-top: 0.25rem;
+}
+
+.form a:hover {
+  opacity: 0.7;
+}
+
+.page footer {
+  position: fixed;
+  bottom: 0;
+  background-color: var(--box-background-color);
+  width: 100%;
+  padding-left: 8rem;
+  color: var(--text-info);
+  font-size: 0.7rem;
+  line-height: 2rem;
+}
+
+.modalForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalFormName {
+  display: flex;
+}
+
+.modalFormName div {
+  width: 0.5rem;
+}
+
+.modalFormEmail {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalFormBirthdateLabel {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.modalFormBirthdateSelects {
+  display: flex;
+}
+
+.modalFormBirthdateSelects select {
+  flex: 1;
+}
+
+.modalFormBirthdateSelects > div {
+  width: 0.3rem;
+}

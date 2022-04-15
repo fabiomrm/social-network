@@ -1,0 +1,20 @@
+.container {
+  background: #fff;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.313rem 0.8rem;
+}
+
+.container div {
+  display: flex;
+  align-items: center;
+}
+
+.container div img {
+  margin-left: 0.8rem;
+}
+
+.container div span {
+  margin-left: 0.5rem;
+}

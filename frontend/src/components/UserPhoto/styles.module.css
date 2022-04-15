@@ -1,0 +1,16 @@
+:root {
+  --user-photo-normal-size: 2.5rem;
+  --user-photo-small-size: 1.8rem;
+}
+
+.userPhoto {
+  width: var(--user-photo-normal-size);
+  height: var(--user-photo-normal-size);
+  object-fit: cover;
+}
+
+.userPhotoSmall {
+  width: var(--user-photo-small-size);
+  height: var(--user-photo-small-size);
+  object-fit: cover;
+}

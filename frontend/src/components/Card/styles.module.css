@@ -1,0 +1,7 @@
+.container {
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  border-radius: var(--box-border-radius);
+  padding: 1rem;
+  width: 40rem;
+}
