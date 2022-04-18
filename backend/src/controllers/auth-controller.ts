@@ -15,12 +15,12 @@ class AuthController {
             if (bcrypt.compareSync(password, user.password)) {
                 const token = jwt.sign({
                     id: user.id,
-                }, process.env.JWT_SECRET || 'secret', {
+                }, process.env.JWT_SECRET || '', {
                     expiresIn: "12h"
                 })
                 return token;
             } else {
-                return 'aa'
+                return undefined;
             }
         }
     }

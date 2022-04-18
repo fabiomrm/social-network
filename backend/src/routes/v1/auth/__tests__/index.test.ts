@@ -32,7 +32,7 @@ describe('Login as user', () => {
             },
             body: JSON.stringify({
                 email: "fulaunosilva@gmail.com",
-                password: "312456",
+                password: "333333",
             })
         })
 
