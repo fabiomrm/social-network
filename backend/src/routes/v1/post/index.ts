@@ -5,6 +5,20 @@ import postController from '../../../controllers/post-controller';
 
 const router = express.Router();
 
+router.get("/post", async (req: Request, res: Response) => {
+
+  const userId = (req as any).authUserId;
+  try {
+    const posts = await postController.findAll(userId);
+
+    return res.json({ posts })
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: "Erro interno ao tentar obter listagem de posts"
+    })
+  }
+})
+
 router.post("/post", async (req: Request, res: Response) => {
   let post: Post = req.body;
   const userId = (req as any).authUserId;

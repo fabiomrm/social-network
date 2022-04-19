@@ -49,4 +49,30 @@ describe("Create post", () => {
     console.log(json)
     expect(response.status).toBe(201);
   })
+});
+
+describe('get posts', () => {
+  it('should not allow get posts when not authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/post", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+
+    expect(response.status).toBe(401);
+  })
+  it('should allow get posts when not authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/post", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+    })
+
+    expect(response.status).toBe(200);
+    const json = await response.json();
+    expect(Array.isArray(json.posts)).toBe(true);
+  })
 })
