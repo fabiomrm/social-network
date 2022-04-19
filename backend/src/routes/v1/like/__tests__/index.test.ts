@@ -26,7 +26,6 @@ describe('like test', () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        text: "Meu primeiro post",
       })
     })
 
@@ -40,7 +39,7 @@ describe('like test', () => {
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
-        text: "Meu primeiro post",
+        postId: 1,
         userId: 1,
         test: true
       })
@@ -49,7 +48,7 @@ describe('like test', () => {
 
     expect(response.status).toBe(201);
     const json = await response.json();
-    expect(Number(json.comment.id > 0)).toBe(true);
+    expect(Number(json.like.id) > 0).toBe(true);
 
   })
 })
