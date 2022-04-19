@@ -43,6 +43,7 @@ describe("Create comment", () => {
       body: JSON.stringify({
         text: "Meu primeiro comentário",
         postId: 1,
+        test: true,
 
       })
     })

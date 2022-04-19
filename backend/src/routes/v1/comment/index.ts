@@ -16,9 +16,6 @@ router.post("/comment", async (req: Request, res: Response) => {
         comment.id = 1;
 
       } else {
-        if ((comment as any).test) {
-          delete (comment as any).test
-        }
         comment = await commentController.create(comment);
       }
 
