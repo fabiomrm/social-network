@@ -43,11 +43,13 @@ describe("Create comment", () => {
       body: JSON.stringify({
         text: "Meu primeiro comentário",
         postId: 1,
-        test: true,
+
       })
     })
     expect(response.status).toBe(201);
     const json = await response.json();
+    console.log(json.comment)
+    expect(Number(json.comment.id) > 0).toBe(true)
 
   })
 });

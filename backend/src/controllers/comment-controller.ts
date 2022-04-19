@@ -8,8 +8,13 @@ class CommentController {
     const prisma = new PrismaClient();
     try {
       return await prisma.comment.create({
-        data: comment
+        data: {
+          text: comment.text,
+          postId: comment.postId,
+          userId: comment.userId
+        }
       })
+
     } catch (e) {
       throw e;
     } finally {

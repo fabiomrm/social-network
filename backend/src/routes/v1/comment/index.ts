@@ -8,8 +8,10 @@ const router = express.Router();
 
 router.post("/comment", async (req: Request, res: Response) => {
   let comment: Comment = req.body
+  const userId = (req as any).authUserId;
   try {
     if (comment) {
+      comment.userId = userId;
       if ((comment as any).test) {
         comment.id = 1;
 
