@@ -1,5 +1,5 @@
-import { UserPhoto } from "../UserPhoto";
-import styles from "./styles.module.css";
+import { UserPhoto } from '../UserPhoto';
+import styles from './styles.module.css';
 
 export const Comment = () => {
   return (
@@ -7,9 +7,7 @@ export const Comment = () => {
       <UserPhoto small />
       <div>
         <h2>Nome Usuário</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, est.
-        </p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, est.</p>
       </div>
     </div>
   );
