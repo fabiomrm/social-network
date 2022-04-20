@@ -20,11 +20,11 @@ export const PostField = ({ onNewPost }: Props) => {
 
   useEffect(() => {
     if (error) {
-      console.log('Ocorreu um erro: ', error);
-    } else {
-      console.log('Post criado: ', response);
+      console.log(error);
+    } else if (response) {
+      onNewPost();
     }
-  }, [response, error]);
+  }, [response, error, onNewPost]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
