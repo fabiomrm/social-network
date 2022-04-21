@@ -5,23 +5,47 @@ import { Input } from '../../components/Input';
 import { useState } from 'react';
 import { ContextualHelp } from '../../components/ContextualHelp';
 import { Select } from '../../components/Select';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { days, months, years } from '../../utils/date';
 import { useForm } from 'react-hook-form';
+
+import { useAuth } from '../../contexts/AuthContext';
 import { User } from '../../types';
-import { useFetch } from '../../hooks/useFetch';
 
 export const Login = () => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [day, setDay] = useState<string | number>('');
   const [month, setMonth] = useState<string | number>('');
   const [year, setYear] = useState<string | number>('');
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const { request, error, fetching } = useFetch<T>();
   const { register, handleSubmit } = useForm();
 
+  const { login, signUp, error } = useAuth();
+
+  const handleSignIn = async (data: any) => {
+    setErrorMessage('');
+    if (data.email && data.password) {
+      await login(data);
+    } else {
+      setErrorMessage('Preencha suas credenciais');
+    }
+  };
+
+  const handleSignUp = async (data: any) => {
+    const user: User = { ...data };
+    user.birthdate = `${day}/${month}/${year}`;
+    setErrorMessage('');
+    if (user.name && user.surname && user.email && user.password) {
+      const success = await signUp(user);
+      if (success) {
+        setSuccessMessage('Cadastro feito com sucesso!');
+        setModalOpen(false);
+      } else {
+        setErrorMessage('Preencha suas credenciais');
+      }
+    }
+  };
   const handleCloseModal = () => {
     setModalOpen(false);
   };
@@ -35,34 +59,6 @@ export const Login = () => {
     return month.charAt(0).toUpperCase() + month.slice(1);
   };
 
-  const login = async (data: any) => {
-    if (data.email && data.password) {
-      const json = await request('/api/v1/sign-in', 'POST', data);
-      if (json.token) {
-        localStorage.setItem('token', json.token);
-        navigate('/feed');
-      }
-    } else {
-      setErrorMessage('Preencha suas credenciais!');
-    }
-  };
-
-  const signUp = async (data: any) => {
-    setErrorMessage('');
-    const user: User = { ...data };
-    user.birthdate = `${day}/${month}/${year}`;
-    if (user.name && user.surname && user.email && user.password) {
-      const json = await request('/api/v1/sign-up', 'POST', user);
-      console.log(json);
-      if (json.user.id) {
-        setSuccessMessage('Cadastro efetuado com sucesso!');
-        setModalOpen(false);
-      }
-    } else {
-      setErrorMessage('Preencha seus dados!');
-    }
-  };
-
   return (
     <div className={styles.page}>
       <div className={styles.box}>
@@ -71,7 +67,7 @@ export const Login = () => {
           <p>Conecte-se com ideias e compartilhe suas ideias</p>
         </div>
         <div className={styles.form}>
-          <form onSubmit={handleSubmit(login)}>
+          <form onSubmit={handleSubmit(handleSignIn)}>
             <Input type="email" placeholder="Email" register={register} name="email" />
             <Input type="password" placeholder="Senha" register={register} name="password" />
             <Button fullWidth type="submit">
@@ -95,7 +91,7 @@ export const Login = () => {
         visible={isModalOpen}
         onClose={handleCloseModal}
       >
-        <form className={styles.modalForm} onSubmit={handleSubmit(signUp)}>
+        <form className={styles.modalForm} onSubmit={handleSubmit(handleSignUp)}>
           <div className={styles.modalFormName}>
             <Input type="text" placeholder="Nome" register={register} name="name" />
             <div />

@@ -1,11 +1,12 @@
-import styles from "./styles.module.css";
-import logoIcon from "../../assets/images/logo-icon.svg";
-import dropdownIcon from "../../assets/images/dropdown-icon.svg";
-import { UserPhoto } from "../UserPhoto";
-import { useNavigate } from "react-router-dom";
+import styles from './styles.module.css';
+import logoIcon from '../../assets/images/logo-icon.svg';
+import dropdownIcon from '../../assets/images/dropdown-icon.svg';
+import { UserPhoto } from '../UserPhoto';
+import { useAuth } from '../../contexts/AuthContext';
 
 export const Header = () => {
-  const navigate = useNavigate();
+  const { logout } = useAuth();
+
   return (
     <div className={styles.container}>
       <img src={logoIcon} alt="logo" />
@@ -13,10 +14,10 @@ export const Header = () => {
         <UserPhoto small />
         <span>Nome</span>
         <img
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
           src={dropdownIcon}
           alt="seta dropdown"
-          onClick={() => navigate("/")}
+          onClick={logout}
         />
       </div>
     </div>

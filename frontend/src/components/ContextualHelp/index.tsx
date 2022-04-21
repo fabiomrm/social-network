@@ -1,14 +1,14 @@
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
-import questionIcon from "../../assets/images/question-image.png";
-import { useEffect, useRef, useState } from "react";
+import questionIcon from '../../assets/images/question-image.png';
+import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
 };
 export const ContextualHelp = ({ children }: Props) => {
   const [ishelpVisible, setIsHelpVisbile] = useState(false);
-  const componentRef = useRef<HTMLDivElement | null>();
+  const componentRef = useRef<HTMLDivElement>(null);
 
   const handleCLickOutside = (event: any) => {
     if (componentRef.current && !componentRef.current.contains(event.target)) {
@@ -17,16 +17,13 @@ export const ContextualHelp = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleCLickOutside);
+    document.addEventListener('mousedown', handleCLickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleCLickOutside);
+      document.removeEventListener('mousedown', handleCLickOutside);
     };
   }, []);
   return (
-    <div
-      ref={(ref) => (componentRef.current = ref)}
-      className={styles.container}
-    >
+    <div ref={componentRef} className={styles.container}>
       <img src={questionIcon} onClick={() => setIsHelpVisbile(true)} />
       {ishelpVisible && <div>{children}</div>}
     </div>

@@ -1,5 +1,10 @@
-import { MainRoutes } from "./MainRoutes";
+import { AuthContextProvider } from './contexts/AuthContext';
+import { MainRoutes } from './MainRoutes';
 
 export const App = () => {
-  return <MainRoutes />;
+  return (
+    <AuthContextProvider>
+      <MainRoutes />
+    </AuthContextProvider>
+  );
 };

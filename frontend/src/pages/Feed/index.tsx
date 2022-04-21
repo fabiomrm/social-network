@@ -11,9 +11,7 @@ type FeedResponse = {
 };
 
 export const Feed = () => {
-  const [initialRequest, setInitialRequest] = useState(true);
   const [posts, setPosts] = useState<PostType[]>([]);
-
   const { request, response, error } = useFetch<FeedResponse>();
 
   const updatePostList = useCallback(() => {
@@ -25,15 +23,12 @@ export const Feed = () => {
       console.log('updatePost error: ' + error);
     } else if (response) {
       setPosts(response.posts);
-      console.log(response.posts);
     }
   }, [error, response]);
 
   useEffect(() => {
-    if (initialRequest) {
-      updatePostList();
-    }
-  }, [initialRequest, updatePostList]);
+    updatePostList();
+  }, [updatePostList]);
 
   return (
     <div>
