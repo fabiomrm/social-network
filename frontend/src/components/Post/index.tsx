@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 import likeIcon from '../../assets/images/like-icon.svg';
 import commentIcon from '../../assets/images/comment-icon.svg';
 import { PostType } from '../../types';
+import { formatDate } from '../../utils/date';
 
 type Props = {
   post: PostType;
@@ -18,7 +19,7 @@ export const Post = ({ post }: Props) => {
         <UserPhoto />
         <div>
           <h2>Nome do Usuário</h2>
-          <span>{String(post.createdAt)}</span>
+          <span>{formatDate(post.createdAt)}</span>
         </div>
       </div>
       <div className={styles.textArea}>

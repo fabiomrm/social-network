@@ -15,4 +15,6 @@ export type PostType = {
   userId: number;
   createdAt: Date;
   updatedAt: Date;
+  user: User;
+  comments: Comment[];
 };

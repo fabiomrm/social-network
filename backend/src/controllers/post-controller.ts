@@ -14,6 +14,10 @@ class PostController {
           userId: {
             in: ids
           }
+        },
+        include: {
+          user: true,
+          comments: true,
         }
       })
     } catch (e) {
