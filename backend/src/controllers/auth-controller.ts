@@ -2,6 +2,7 @@ import { User } from "@prisma/client";
 import userController from "./user-controller";
 import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
+import { jwtGenerateToken } from "../middleware/jwt-middleware";
 
 class AuthController {
     async signUp(user: User) {
@@ -13,11 +14,7 @@ class AuthController {
         const user = await userController.getUserByEmail(email);
         if (user) {
             if (bcrypt.compareSync(password, user.password)) {
-                const token = jwt.sign({
-                    id: user.id,
-                }, process.env.JWT_SECRET || '', {
-                    expiresIn: "12h"
-                })
+                const token = jwtGenerateToken(user.id);
                 return token;
             } else {
                 return undefined;
