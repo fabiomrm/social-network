@@ -4,4 +4,5 @@
   border-radius: var(--box-border-radius);
   padding: 1rem;
   width: 40rem;
+  margin-bottom: 1rem;
 }
