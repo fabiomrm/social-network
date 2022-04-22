@@ -8,23 +8,39 @@ import { useFetch } from '../../hooks/useFetch';
 
 type FeedResponse = {
   posts: PostType[];
+  post?: PostType;
 };
 
 export const Feed = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
-  const { request, response, error } = useFetch<FeedResponse>();
+  const { request, response, error, clear } = useFetch<FeedResponse>();
 
   const updatePostList = useCallback(() => {
     request('/api/v1/post', 'GET');
   }, [request]);
 
+  const updatePost = async (post: PostType) => {
+    request(`/api/v1/post/${post.id}`);
+  };
+
   useEffect(() => {
     if (error) {
       console.log('updatePost error: ' + error);
     } else if (response) {
-      setPosts(response.posts);
+      if (response.posts) {
+        setPosts(response.posts);
+      } else if (response.post) {
+        const post = posts.find((p) => p.id === response.post?.id);
+        if (post) {
+          const index = posts.indexOf(post);
+          setPosts((prevPosts) => {
+            return prevPosts.splice(index, 1, response.post as PostType);
+          });
+        }
+      }
     }
-  }, [error, response]);
+    clear();
+  }, [error, response, posts, clear]);
 
   useEffect(() => {
     updatePostList();
@@ -36,7 +52,7 @@ export const Feed = () => {
       <div className={styles.feedContainer}>
         <PostField onNewPost={updatePostList} />
         {posts.map((post) => (
-          <Post key={`post-item-${post.id}`} post={post} />
+          <Post key={`post-item-${post.id}`} post={post} onPostUpdated={updatePost} />
         ))}
       </div>
     </div>

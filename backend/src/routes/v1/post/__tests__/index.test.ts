@@ -62,7 +62,7 @@ describe('get posts', () => {
 
     expect(response.status).toBe(401);
   })
-  it('should allow get posts when not authenticated', async () => {
+  it('should allow get posts when authenticated', async () => {
     const response = await fetch("http://localhost:3001/api/v1/post", {
       method: "GET",
       headers: {
@@ -74,5 +74,18 @@ describe('get posts', () => {
     expect(response.status).toBe(200);
     const json = await response.json();
     expect(Array.isArray(json.posts)).toBe(true);
+  })
+  it('should allow get post by id when authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/post/1", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+    })
+
+    expect(response.status).toBe(200);
+    const json = await response.json();
+    expect(json.post.id > 0).toBe(true);
   })
 })
