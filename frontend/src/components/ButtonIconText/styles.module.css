@@ -1,10 +1,31 @@
 .container {
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.container svg path {
+  fill: var(--text-info);
+}
+
+.container.active svg path {
+  fill: #25f;
 }
 
 .container label {
   margin-left: 0.5rem;
   font-weight: 700;
   color: var(--text-info);
+  cursor: pointer;
+}
+
+.container span {
+  font-size: 0.8rem;
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 0.5rem 0.75rem;
+}
+
+.container span:hover {
+  background-color: var(--border-color);
 }

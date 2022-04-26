@@ -3,8 +3,8 @@ import { Card } from '../Card';
 import { UserPhoto } from '../UserPhoto';
 import { Comment } from '../../components/Comment';
 import styles from './styles.module.css';
-import likeIcon from '../../assets/images/like-icon.svg';
-import commentIcon from '../../assets/images/comment-icon.svg';
+import LikeIcon from '../../assets/images/like-icon.svg?component';
+import CommentIcon from '../../assets/images/comment-icon.svg?component';
 import { PostType } from '../../types';
 import { formatDate } from '../../utils/date';
 import { formatName } from '../../utils/name';
@@ -21,7 +21,7 @@ export const Post = ({ post, onPostUpdated }: Props) => {
   const [commentText, setCommentText] = useState('');
   const { request, response, error, clear } = useFetch();
 
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, setFocus } = useForm();
 
   useEffect(() => {
     if (error) {
@@ -39,6 +39,12 @@ export const Post = ({ post, onPostUpdated }: Props) => {
     setValue('text', '');
   };
 
+  const onClickButtonLike = () => {};
+
+  const onClickButtonComment = () => {
+    setFocus('text');
+  };
+
   return (
     <Card className={styles.container}>
       <div className={styles.userData}>
@@ -53,8 +59,12 @@ export const Post = ({ post, onPostUpdated }: Props) => {
       </div>
       <hr />
       <div className={styles.buttonLikeCommentArea}>
-        <ButtonIconText icon={likeIcon} label="Curtir" />
-        <ButtonIconText icon={commentIcon} label="Comentar" />
+        <ButtonIconText label="Curtir" onClick={onClickButtonLike} active badgeCount={2}>
+          <LikeIcon />
+        </ButtonIconText>
+        <ButtonIconText label="Comentar" onClick={onClickButtonComment}>
+          <CommentIcon />
+        </ButtonIconText>
       </div>
       <hr />
       {post.comments.map((comment) => (

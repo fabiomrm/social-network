@@ -22,6 +22,7 @@
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@honkhonk/vite-plugin-svgr": "^1.1.0",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
