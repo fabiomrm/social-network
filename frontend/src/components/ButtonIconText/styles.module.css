@@ -4,6 +4,10 @@
   cursor: pointer;
 }
 
+.container:hover {
+  opacity: 0.7;
+}
+
 .container svg path {
   fill: var(--text-info);
 }
