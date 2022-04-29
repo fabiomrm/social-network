@@ -1,6 +1,7 @@
 import { Post, PrismaClient } from "@prisma/client";
 import prisma from "../services/prisma-service";
 import friendController from "./friend-controller";
+import likeController from "./like-controller";
 
 class PostController {
 
@@ -9,7 +10,7 @@ class PostController {
     const friends = await friendController.findFriends(userId);
     const ids = friends.map(friend => friend.userAId === userId ? friend.userBId : friend.userAId)
     ids.push(userId);
-    return prisma.post.findMany({
+    const posts = await prisma.post.findMany({
       where: {
         userId: {
           in: ids
@@ -20,15 +21,24 @@ class PostController {
         comments: true,
       }
     })
+    for (const post of posts) {
+      (post as any).likes = await likeController.fetchByPostId(post.id);
+    }
 
   }
 
   async findById(id: number) {
-    return await prisma.post.findUnique({
+    const post = await prisma.post.findUnique({
       where: {
         id
+      },
+      include: {
+        user: true,
+        comments: true
       }
-    })
+    });
+
+    (post as any).likes = await likeController.fetchByPostId(id);
   }
 
   async create(post: Post) {

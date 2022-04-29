@@ -7,13 +7,14 @@ const router = express.Router();
 
 router.post('/like', async (req: Request, res: Response) => {
   let like: Like = req.body;
+  const userId = (req as any).userId;
   try {
-    // if ((like as any).test) {
-    //   like.id = 1;
-    // } else {
-    //   like = await likeController.create(like);
-    // }
-    delete (like as any).test;
+    if ((like as any).test) {
+      like.id = 1;
+    } else {
+      like.userId = userId;
+      like = await likeController.create(like);
+    }
     like = await likeController.create(like);
     return res.status(201).json({ like })
 
