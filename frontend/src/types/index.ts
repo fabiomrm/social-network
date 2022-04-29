@@ -25,5 +25,14 @@ export type PostType = {
   createdAt: Date;
   updatedAt: Date;
   user: User;
-  comments: Comment[];
+  comments?: Comment[];
+  likes?: Like[];
+};
+
+export type Like = {
+  id: number;
+  postId: number | null;
+  commentId: number | null;
+  userId: number;
+  createdAt: Date;
 };

@@ -39,7 +39,9 @@ export const Post = ({ post, onPostUpdated }: Props) => {
     setValue('text', '');
   };
 
-  const onClickButtonLike = () => {};
+  const onClickButtonLike = () => {
+    request('/api/v1/like', 'POST', { postId: post.id });
+  };
 
   const onClickButtonComment = () => {
     setFocus('text');
@@ -59,7 +61,11 @@ export const Post = ({ post, onPostUpdated }: Props) => {
       </div>
       <hr />
       <div className={styles.buttonLikeCommentArea}>
-        <ButtonIconText label="Curtir" onClick={onClickButtonLike} active badgeCount={2}>
+        <ButtonIconText
+          label="Curtir"
+          onClick={onClickButtonLike}
+          badgeCount={post.likes?.length || 0}
+        >
           <LikeIcon />
         </ButtonIconText>
         <ButtonIconText label="Comentar" onClick={onClickButtonComment}>
@@ -67,9 +73,10 @@ export const Post = ({ post, onPostUpdated }: Props) => {
         </ButtonIconText>
       </div>
       <hr />
-      {post.comments.map((comment) => (
-        <Comment key={`comment-${comment.id}`} comment={comment} user={post.user} />
-      ))}
+      {post.comments &&
+        post.comments.map((comment) => (
+          <Comment key={`comment-${comment.id}`} comment={comment} user={post.user} />
+        ))}
       <div>
         <form onSubmit={handleSubmit(handleSubmitComment)} className={styles.commentContainer}>
           <UserPhoto />

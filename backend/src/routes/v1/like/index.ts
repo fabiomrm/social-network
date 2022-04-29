@@ -8,12 +8,14 @@ const router = express.Router();
 router.post('/like', async (req: Request, res: Response) => {
   let like: Like = req.body;
   const userId = (req as any).userId;
+  console.log(like)
+
   try {
     if ((like as any).test) {
       like.id = 1;
     } else {
       like.userId = userId;
-      like = await likeController.create(like);
+
     }
     like = await likeController.create(like);
     return res.status(201).json({ like })

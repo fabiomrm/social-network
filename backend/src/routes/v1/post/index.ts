@@ -11,7 +11,6 @@ router.get("/post", async (req: Request, res: Response) => {
   const newToken = (req as any).newToken
   try {
     const posts = await postController.findAll(userId);
-
     return res.json({ posts, newToken })
   } catch (e) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
