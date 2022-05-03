@@ -31,6 +31,7 @@ export const Post = ({ post, onPostUpdated }: Props) => {
       clear();
       onPostUpdated(post);
     }
+    console.log(post);
   }, [response, error, onPostUpdated, post, clear]);
 
   const handleSubmitComment = (data: any) => {

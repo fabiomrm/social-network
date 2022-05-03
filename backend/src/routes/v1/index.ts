@@ -4,6 +4,7 @@ import auth from './auth';
 import post from './post';
 import comment from './comment';
 import like from './like';
+import user from './user';
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -15,4 +16,5 @@ router.use(jwtMiddleware);
 router.use(post);
 router.use(comment);
 router.use(like);
+router.use(user);
 export default router;

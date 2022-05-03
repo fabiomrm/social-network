@@ -12,6 +12,15 @@ class LikeController {
     return await prisma.like.findMany({
       where: {
         postId: postId,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            surname: true
+          }
+        }
       }
     })
   }

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import { User } from '../types';
 
@@ -10,6 +10,7 @@ type AuthContextData = {
   logout: () => void;
   error: string | undefined | null;
   fetching: boolean;
+  user: User | null;
 };
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -20,6 +21,7 @@ type Props = {
 export const AuthContextProvider = ({ children }: Props) => {
   const [token, setToken] = useState<string | null>(null);
   const { request, error, fetching } = useFetch<any>();
+  const [user, setUser] = useState<User | null>(null);
 
   const login = async (data: any) => {
     const json = await request('/api/v1/sign-in', 'POST', data);
@@ -42,9 +44,18 @@ export const AuthContextProvider = ({ children }: Props) => {
     setToken(null);
   };
 
+  const getUser = useCallback(async () => {
+    if (user) return;
+    const json = await request('api/v1/user/me');
+    if (json.user) {
+      setUser(json.user);
+    }
+  }, [request, user]);
+
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-  }, []);
+    getUser();
+  }, [getUser]);
 
   const value = {
     token,
