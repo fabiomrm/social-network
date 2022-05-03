@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/like', async (req: Request, res: Response) => {
   let like: Like = req.body;
   const userId = (req as any).authUserId;
-  console.log(like)
+
 
   try {
     if ((like as any).test) {

@@ -19,7 +19,7 @@ export const formatDate = (date: Date | string) => {
     const dt = typeof date === "string" ? stringToDate(date) : date;
     const now = new Date();
     const diffHours = Math.abs(now.getTime() - dt.getTime());
-    console.log(diffHours)
+
     if (diffHours < 24) {
 
         return `${diffHours}h`

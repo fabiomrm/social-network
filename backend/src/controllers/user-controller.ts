@@ -16,7 +16,6 @@ class UserController {
                 data: user,
             })
         } catch (e) {
-            console.log(e)
             throw e;
         } finally {
             prisma.$disconnect();
