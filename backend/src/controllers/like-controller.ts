@@ -2,21 +2,16 @@ import { Like } from "@prisma/client";
 import prisma from "../services/prisma-service";
 
 class LikeController {
-
   async create(like: Like) {
-
     return await prisma.like.create({
-      data: like,
-    })
+      data: like
+    });
   }
 
   async fetchByPostId(postId: number) {
     return await prisma.like.findMany({
       where: {
-        postId
-      },
-      include: {
-        user: true
+        postId: postId,
       }
     })
   }

@@ -30,7 +30,6 @@ model Post {
   userId    Int
   user      User      @relation(fields: [userId], references: [id])
   comments   Comment[]
-  
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -52,16 +51,14 @@ model Friend {
   accepted  Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   @@id([userAId, userBId])
 }
 
 model Like {
-  id Int @id @default(autoincrement())
-  postId Int?
-  commentId Int?
-  userId Int
-  user User @relation(fields: [userId], references: [id])
-  
-  createdAt DateTime @default(now())
+ id Int @id @default(autoincrement())
+ postId Int?
+ commentId Int?
+ userId Int
+ user User @relation(fields: [userId], references: [id])
+ createdAt DateTime @default(now())
 }

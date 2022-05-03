@@ -11,6 +11,7 @@ class UserController {
             user.password = hash;
 
 
+
             return await prisma.user.create({
                 data: user,
             })

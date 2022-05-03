@@ -21,11 +21,11 @@ class PostController {
         comments: true,
       }
     })
-    // for (const post of posts) {
-    //   (post as any).likes = await likeController.fetchByPostId(post.id);
-    //   console.log('aqui agora')
-    // }
-    console.log(posts)
+
+    for (const post of posts) {
+      (post as any).likes = await likeController.fetchByPostId(post.id);
+    }
+
     return posts;
 
   }
@@ -40,7 +40,6 @@ class PostController {
         comments: true
       }
     });
-
     (post as any).likes = await likeController.fetchByPostId(id);
 
     return post;

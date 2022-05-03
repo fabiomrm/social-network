@@ -42,6 +42,7 @@ export function useFetch<T = unknown>(
 
             fetch(url, config)
                 .then(async (res) => {
+                    console.log('oi')
                     const json = await res.json();
                     if (!res.ok) {
                         setError(json.message);
