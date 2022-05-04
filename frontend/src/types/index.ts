@@ -35,4 +35,5 @@ export type Like = {
   commentId: number | null;
   userId: number;
   createdAt: Date;
+  user: User;
 };

@@ -11,6 +11,7 @@ import { formatName } from '../../utils/name';
 import React, { useEffect, useState } from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '../../contexts/AuthContext';
 
 type Props = {
   post: PostType;
@@ -20,6 +21,8 @@ type Props = {
 export const Post = ({ post, onPostUpdated }: Props) => {
   const [commentText, setCommentText] = useState('');
   const { request, response, error, clear } = useFetch();
+
+  const { user } = useAuth();
 
   const { register, handleSubmit, setValue, setFocus } = useForm();
 
@@ -66,6 +69,10 @@ export const Post = ({ post, onPostUpdated }: Props) => {
           label="Curtir"
           onClick={onClickButtonLike}
           badgeCount={post.likes?.length || 0}
+          active={
+            post.likes ? post.likes.find((l) => l.userId === user?.id || 0) !== undefined : false
+          }
+          list={post.likes?.map((l) => `${l.user.name} ${l.user.surname}`)}
         >
           <LikeIcon />
         </ButtonIconText>

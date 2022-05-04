@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }: Props) => {
 
   const getUser = useCallback(async () => {
     if (user) return;
-    const json = await request('api/v1/user/me');
+    const json = await request('/api/v1/user/me');
     if (json.user) {
       setUser(json.user);
     }
@@ -64,7 +64,8 @@ export const AuthContextProvider = ({ children }: Props) => {
     signUp,
     logout,
     error,
-    fetching
+    fetching,
+    user
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
