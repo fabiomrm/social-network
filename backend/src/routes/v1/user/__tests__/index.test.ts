@@ -18,36 +18,35 @@ beforeAll(async () => {
   token = json.token;
 })
 
-describe("Create post", () => {
-  it('should not allow create post when not authenticated', async () => {
-    const response = await fetch("http://localhost:3001/api/v1/post", {
+describe("Search users", () => {
+  it('should not allow search users when not authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        text: "Meu primeiro post",
+        searchTerm: "Teste",
       })
     })
 
     expect(response.status).toBe(401);
   })
-  it('should  allow create post when authenticated', async () => {
-    const response = await fetch("http://localhost:3001/api/v1/post", {
+  it('should  allow search user when authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/user/0/20", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
-        text: "Meu primeiro post",
-        test: true
+        searchTerm: "Teste"
       })
     })
 
+    expect(response.status).toBe(200);
     const json = await response.json();
-    console.log(json)
-    expect(response.status).toBe(201);
+    expect(Array.isArray(json.users)).toBe(true);
   })
 });
 

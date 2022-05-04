@@ -17,4 +17,18 @@ router.get('/user/me', async (req: Request, res: Response) => {
   return res.status(StatusCodes.NOT_FOUND).json({ message: "Usuário não existe" })
 })
 
+router.post('/user/:page/:count', async (req: Request, res: Response) => {
+  const userId = (req as any).authUserId;
+  const { page, count } = req.params;
+  const { searchTerm } = req.body;
+  try {
+    const users = await userController.search(userId, searchTerm, Number(page), Number(count));
+  } catch (e) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Erro ao buscar usuários" })
+  }
+
+
+
+})
+
 export default router;

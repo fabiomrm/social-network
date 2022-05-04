@@ -9,8 +9,8 @@ beforeAll(async () => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      email: "fulaunosilva@gmail.com",
-      password: "abcd1234",
+      email: "teste@teste.com",
+      password: "teste",
     })
   })
 

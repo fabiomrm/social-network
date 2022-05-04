@@ -25,13 +25,19 @@ export const ButtonIconText = ({
 
   const handleMouseOver = (event: any) => {
     if (componentRef.current && !componentRef.current.contains(event.target)) {
-      setShowList(true);
-    } else {
       setShowList(false);
+    } else {
+      setShowList(true);
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    document.addEventListener('mouseover', handleMouseOver);
+
+    return () => {
+      document.removeEventListener('mouseover', handleMouseOver);
+    };
+  }, []);
 
   return (
     <div className={[styles.container, active ? styles.active : null].join(' ')} onClick={onClick}>
@@ -40,7 +46,7 @@ export const ButtonIconText = ({
       <label>{label}</label>
       <div>
         {badgeCount ? <span ref={componentRef}>{badgeCount}</span> : null}
-        {list && (
+        {showList && list && (
           <div className={styles.badgeListItems}>
             {list?.map((item, index) => (
               <div key={`like-badge-list-item-${index}`}>{item}</div>
