@@ -5,6 +5,7 @@ import post from './post';
 import comment from './comment';
 import like from './like';
 import user from './user';
+import friend from './friend';
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -17,4 +18,5 @@ router.use(post);
 router.use(comment);
 router.use(like);
 router.use(user);
+router.use(friend);
 export default router;

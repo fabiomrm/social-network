@@ -23,8 +23,9 @@ router.post('/user/:page/:count', async (req: Request, res: Response) => {
   const { searchTerm } = req.body;
   try {
     const users = await userController.search(userId, searchTerm, Number(page), Number(count));
+    return res.json({ users });
   } catch (e) {
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Erro ao buscar usuários" })
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: "Erro ao buscar usuários" });
   }
 
 

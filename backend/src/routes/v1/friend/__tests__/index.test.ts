@@ -18,39 +18,35 @@ beforeAll(async () => {
   token = json.token;
 })
 
-describe("Create comment", () => {
-  it('should not allow add comment when not authenticated', async () => {
-    const response = await fetch("http://localhost:3001/api/v1/comment", {
+describe("Friend request", () => {
+  it('should not allow send friend request when not authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/friend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        text: "Meu primeiro comentário",
-        postId: 1,
+        friendId: 2,
       })
     })
 
     expect(response.status).toBe(401);
   })
-  it('should  allow add comment when authenticated', async () => {
-    const response = await fetch("http://localhost:3001/api/v1/comment", {
+  it('should  allow send friend request when authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/friend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({
-        text: "Meu primeiro comentário",
-        postId: 1,
+        friendId: 2,
         test: true,
-
       })
     })
-    expect(response.status).toBe(201);
+    console.log(response)
+    expect(response.status).toBe(200);
     const json = await response.json();
-    expect(Number(json.comment.id) > 0).toBe(true)
-
+    expect(json.success).toBe(true);
   })
 });
-
