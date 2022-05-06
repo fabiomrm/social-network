@@ -49,4 +49,23 @@ describe("Friend request", () => {
     const json = await response.json();
     expect(json.success).toBe(true);
   })
+
+  it('should  allow accept/decline friend request when authenticated', async () => {
+    const response = await fetch("http://localhost:3001/api/v1/friend/accept", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        friendId: 2,
+        accepted: true,
+        test: true,
+      })
+    })
+    console.log(response)
+    expect(response.status).toBe(200);
+    const json = await response.json();
+    expect(json.success).toBe(true);
+  })
 });
