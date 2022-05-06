@@ -30,9 +30,9 @@ router.post("/friend/accept", async (req: Request, res: Response) => {
   const { friendId, accepted, test } = req.body;
   const userId = (req as any).authUserId;
   try {
-    // if (test) {
-    //   return res.json({ success: true, friend: {} })
-    // }
+    if (test) {
+      return res.json({ success: true, friend: {} })
+    }
     const result = await friendController.accept(userId, friendId, accepted)
     if (result) {
       return res.json({ success: true, friend: result })
